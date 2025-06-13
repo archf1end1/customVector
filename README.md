@@ -1,39 +1,60 @@
-# Custom Vector Implementation
+# CustomVector: A C++ Dynamic Array Implementation
 
-A C++ implementation of a custom vector class that mimics the functionality of std::vector. This implementation includes:
+---
 
-- Dynamic resizing
-- Copy and move semantics
-- Exception handling
-- Basic vector operations (push_back, pop_back, clear, etc.)
+## Overview
+
+`CustomVector` is a templated C++ class that implements a dynamic array, similar in functionality to `std::vector`. It demonstrates core C++ concepts such as **dynamic memory management** using raw pointers, constructors (default, copy, move), destructors, copy and move assignment operators, and basic array manipulation (push, pop, access).
+
+This project is an excellent learning resource for understanding how dynamic arrays work under the hood and the importance of the **"Rule of Five"** for proper resource management in C++.
+
+---
 
 ## Features
 
-- Template-based implementation
-- Rule of Five compliance
-- Dynamic memory management
-- Bounds checking
-- Move semantics support
+* **Templated:** Can store elements of any data type (`int`, `double`, custom objects, etc.).
+* **Dynamic Resizing:** Automatically doubles its capacity when new elements are added and the internal array is full.
+* **Memory Management:** Proper allocation (`new[]`) and deallocation (`delete[]`) of memory to prevent leaks.
+* **Copy Semantics (Deep Copy):**
+    * **Copy Constructor:** Creates an independent copy of an existing `CustomVector`.
+    * **Copy Assignment Operator:** Assigns the elements of one `CustomVector` to another existing `CustomVector`, ensuring a deep copy.
+* **Move Semantics (Efficient Resource Transfer):**
+    * **Move Constructor:** Efficiently transfers ownership of resources from an rvalue `CustomVector` to a new one, avoiding costly deep copies.
+    * **Move Assignment Operator:** Transfers ownership of resources from an rvalue `CustomVector` to an existing one.
+* **Basic Operations:**
+    * `push_back(value)`: Adds an element to the end.
+    * `pop_back()`: Removes the last element.
+    * `operator[]`: Provides direct, array-like access to elements (both mutable and constant versions).
+    * `getSize()`: Returns the current number of elements.
+    * `clear()`: Empties the vector (resets size to 0).
+    * `empty()`: Checks if the vector is empty.
 
-## Usage
+---
 
-```cpp
-CustomVector<int> vec;
-vec.push_back(10);
-vec.push_back(11);
-vec.push_back(12);
+## Getting Started
 
-// Access elements
-for(int i = 0; i < vec.getSize(); i++) {
-    std::cout << vec[i] << " ";
-}
-```
+### Prerequisites
 
-## Requirements
+You'll need a C++ compiler that supports C++11 or later (e.g., g++, clang++).
 
-- C++11 or later
-- Standard C++ library
+### Building and Running
 
-## License
+1.  **Save the code:** Save the provided C++ code into a file named `custom_vector.cpp`.
 
-MIT License 
+2.  **Compile:** Open your terminal or command prompt and compile the code using a C++ compiler.
+
+    ```bash
+    g++ custom_vector.cpp -o custom_vector -std=c++11
+    # Or for a newer standard like C++17
+    # g++ custom_vector.cpp -o custom_vector -std=c++17
+    ```
+
+3.  **Run:** Execute the compiled program.
+
+    ```bash
+    ./custom_vector
+    ```
+
+### Expected Output
+
+The `main` function includes various tests that demonstrate the `CustomVector`'s functionality, including `push_back`, `pop_back`, and the correct behavior of copy and move operations. You should see output similar to this:

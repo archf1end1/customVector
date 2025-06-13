@@ -29,7 +29,7 @@ class CustomVector {
 
         //Copy assignment operator
         CustomVector& operator=(const CustomVector& other) {
-            if (this != other) {
+            if (this != &other) {
                 delete[] data;
                 capacity = other.capacity;
                 size = other.size;
@@ -115,10 +115,55 @@ class CustomVector {
 int main() {
     CustomVector<int> vec;
     vec.push_back(10);
-    vec.push_back(11);
-    vec.push_back(12);
+    vec.push_back(20);
+    vec.push_back(30);
 
-    for(int i = 0; i < vec.getSize(); i++) {
+    std::cout << "Vector elements: ";
+    for (size_t i = 0; i < vec.getSize(); ++i) {
         std::cout << vec[i] << " ";
     }
+    std::cout << std::endl;
+
+    std::cout << "Size of vector: " << vec.getSize() << std::endl;
+
+    vec.pop_back();
+    std::cout << "Size of vector after pop_back: " << vec.getSize() << std::endl;
+    
+    CustomVector<int> vec2 = vec; // Copy constructor
+    std::cout << "Vector elements in vec2: ";
+    for (size_t i = 0; i < vec2.getSize(); ++i) {
+        std::cout << vec2[i] << " ";
+    }
+    std::cout << std::endl;
+    
+    CustomVector<int> vec3;
+    vec3 = vec; // Copy assignment operator
+    std::cout << "Vector elements in vec3: ";
+    for (size_t i = 0; i < vec3.getSize(); ++i) {
+        std::cout << vec3[i] << " ";
+    }
+    std::cout << std::endl;
+    
+    CustomVector<int> vec4 = std::move(vec); // Move constructor
+    std::cout << "Vector elements in vec4: ";
+    for (size_t i = 0; i < vec4.getSize(); ++i) {
+        std::cout << vec4[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "Size of vector vec after move: " << vec.getSize() << std::endl;
+    
+    CustomVector<int> vec5;
+    vec5 = std::move(vec2); // Move assignment operator
+    std::cout << "Vector elements in vec5: ";
+    for (size_t i = 0; i < vec5.getSize(); ++i) {
+        std::cout << vec5[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "Size of vector vec2 after move: " << vec2.getSize() << std::endl;
+    
+    vec5.clear();
+    std::cout << "Size of vector vec5 after clear: " << vec5.getSize() << std::endl;
+    std::cout << "Is vec5 empty?: " << vec5.empty() << std::endl;
+
+    return 0;
 }
